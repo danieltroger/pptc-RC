@@ -1,0 +1,29 @@
+#Include /etc/apache2/mods-enabled/*.load
+#Include /etc/apache2/mods-enabled/*.conf
+LoadModule dir_module /usr/libexec/apache2/mod_dir.so
+LoadModule mime_module /usr/libexec/apache2/mod_mime.so
+ErrorLog /Users/daniel/Desktop/pptc-RC/pptc/._apache2_dir_error.log
+HostnameLookups Off
+NameVirtualHost *:1234
+ServerName deinmac
+Listen 1234
+PidFile /Users/daniel/Desktop/pptc-RC/pptc/._apache2_pid
+<VirtualHost *:1234>
+    ServerAdmin joyer@uc
+    DocumentRoot /Users/daniel/Desktop/pptc-RC/pptc
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride None
+	DirectoryIndex index.html
+	AddType text/html .html
+    </Directory>
+    <Directory /Users/daniel/Desktop/pptc-RC/pptc/>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride None
+	DirectoryIndex index.html
+        AddType text/html .html
+    </Directory>
+    ErrorLog /Users/daniel/Desktop/pptc-RC/pptc/._apache2_dir_error.log
+    LogLevel warn
+</VirtualHost>
+

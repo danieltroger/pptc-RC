@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width" />
+<style>
+#prev
+{
+  position: absolute;
+  left:0;
+  top: 0;
+  height: 100%;
+  width: 50%;
+}
+#next
+{
+  position: absolute;
+  left:50%;
+  top: 0;
+  height: 100%;
+  width: 50%;
+}
+body
+{
+  background: black;
+}
+</style>
+<script>
+var socket = new WebSocket('ws://'+location.hostname+':9000');
+function prev(){socket.send("p");}
+function next(){socket.send("n");}
+window.onkeypress = function(e){var key = e.which||e.keyCode;if(key == 39 || key == 110){next();}else if(key == 37 || key == 112){prev()}}
+</script>
+<body>
+<img src="prev.svg" id="prev" onclick="prev();" />
+<img src="next.svg" id="next" onclick="next();" />
+<span style="position: absolute; color: red; font-size: 10vh; bottom: 2%; left: 1%;">L</span>
+<span style="position: absolute; color: blue; font-size: 10vh; bottom: 2%; right: 1%;">R</span>
+</body>
+</html>
